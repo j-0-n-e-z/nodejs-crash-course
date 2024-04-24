@@ -1,0 +1,19 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	display: grid;
+	place-content: center;
+	min-height: 100vh;
+	background-color: rgb(125, 145, 224);
+	margin: 0;
+}
+
+h1 {
+	text-decoration: underline wavy;
+	text-underline-offset: 10px;
+	text-decoration-color: rebeccapurple;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	color: rgb(7, 242, 230);
+}
