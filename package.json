@@ -1,11 +1,15 @@
 {
-  "name": "nodejs-crash-course",
-  "version": "1.0.0",
-  "description": "Node.js crash course",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Brad Traversy",
-  "license": "MIT"
+	"name": "nodejs-crash-course",
+	"version": "1.0.0",
+	"description": "Node.js crash course",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"author": "Brad Traversy",
+	"license": "MIT",
+	"devDependencies": {
+		"nodemon": "^3.1.0"
+	}
 }
