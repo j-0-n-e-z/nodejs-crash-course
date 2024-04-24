@@ -1,6 +1,6 @@
 import http from 'http'
 
-const PORT = 5000
+const PORT = process.env.PORT
 
 const server = http.createServer((req, res) => {
 	// res.setHeader('Content-Type', 'text/html') // text/plain, text/html, application/json
