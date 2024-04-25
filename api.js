@@ -47,7 +47,7 @@ const notFoundHandler = (req, res) => {
 const createUserHandler = (req, res) => {
 	let body = ''
 	req.on('data', chunk => {
-		body += chunk + ''
+		body += chunk.toString()
 	})
 	req.on('end', () => {
 		const newUser = JSON.parse(body)
