@@ -50,10 +50,15 @@ const createUserHandler = (req, res) => {
 		body += chunk.toString()
 	})
 	req.on('end', () => {
-		const newUser = JSON.parse(body)
-		users.push(newUser)
-		res.statusCode = 201
-		res.end(JSON.stringify(newUser))
+		try {
+			const newUser = JSON.parse(body)
+			users.push(newUser)
+			res.statusCode = 201
+			res.end(JSON.stringify(newUser))
+		} catch {
+			res.statusCode = 400
+			res.end(JSON.stringify({ message: 'Invalid request body' }))
+		}
 	})
 }
 
