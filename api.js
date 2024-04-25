@@ -43,15 +43,35 @@ const notFoundHandler = (req, res) => {
 	res.end(JSON.stringify({ message: 'Route not found' }))
 }
 
+//  Route handler for POST /api/users
+const createUserHandler = (req, res) => {
+	let body = ''
+	req.on('data', chunk => {
+		body += chunk + ''
+	})
+	req.on('end', () => {
+		const newUser = JSON.parse(body)
+		users.push(newUser)
+		res.statusCode = 201
+		res.end(JSON.stringify(newUser))
+	})
+}
+
 const server = createServer((req, res) => {
 	logger(req, res, () => {
 		jsonMiddleware(req, res, () => {
-			if (req.url === '/api/users' && req.method === 'GET') {
-				getUsersHandler(req, res)
-			} else if (req.url.match(/\/api\/users\/\d+/) && req.method === 'GET') {
-				getUserByIdHandler(req, res)
-			} else {
-				notFoundHandler(req, res)
+			if (req.method === 'GET') {
+				if (req.url === '/api/users') {
+					getUsersHandler(req, res)
+				} else if (req.url.match(/\/api\/users\/\d+/)) {
+					getUserByIdHandler(req, res)
+				} else {
+					notFoundHandler(req, res)
+				}
+			} else if (req.method === 'POST') {
+				if (req.url === '/api/users') {
+					createUserHandler(req, res)
+				}
 			}
 		})
 	})
