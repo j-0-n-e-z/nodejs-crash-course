@@ -5,27 +5,27 @@ import url from 'url'
 
 const PORT = process.env.PORT
 
-const __filename = url.fileURLToPath(import.meta.url) // path to server.js
-const __dirname = path.dirname(__filename) // path to folder with server.js inside
-const htmlContentType = { 'Content-Type': 'text/html' }
+// path to server.js
+const __filename = url.fileURLToPath(import.meta.url)
+// path to folder with server.js inside
+const __dirname = path.dirname(__filename)
 
 const server = http.createServer(async (req, res) => {
 	try {
 		if (req.method === 'GET') {
 			let filePath
+			res.setHeader('Content-Type', 'text/html')
 
 			if (req.url === '/styles.css') {
 				filePath = path.join(__dirname, 'public', 'styles.css')
-				res.writeHead(200, { 'Content-Type': 'text/css' })
+				res.setHeader('Content-Type', 'text/css')
 			} else if (req.url === '/') {
 				filePath = path.join(__dirname, 'public', 'index.html')
-				res.writeHead(200, htmlContentType)
 			} else if (req.url === '/about') {
 				filePath = path.join(__dirname, 'public', 'about.html')
-				res.writeHead(200, htmlContentType)
 			} else {
 				filePath = path.join(__dirname, 'public', '404.html')
-				res.writeHead(404, htmlContentType)
+				res.statusCode = 404
 			}
 
 			const data = await fs.readFile(filePath)
